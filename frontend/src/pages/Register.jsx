@@ -21,7 +21,9 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.email.endsWith("@gmail.com")) {
+    const emailRegex1 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex2 = form.email.endsWith("@gmail.com");
+    if (!emailRegex2 || !emailRegex1.test(form.email)) {
       alert("Enter a valid email address");
       return;
     }

@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../services/api";
 
 function History() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchHistory = async () => {
       try {
         const res = await API.get("/reports/history");
-
         setReports(res.data);
       } catch (error) {
         console.log(error);
@@ -18,7 +17,6 @@ function History() {
         setLoading(false);
       }
     };
-
     fetchHistory();
   }, []);
 
@@ -36,12 +34,6 @@ function History() {
 
   return (
     <div className="p-10">
-      <button
-        onClick={() => navigate("/dashboard")}
-        className="bg-gray-800 text-white px-4 py-2 rounded"
-      >
-        Back to Dashboard
-      </button>
       <h1 className="text-3xl font-bold mb-6">Your Health Analysis History</h1>
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -64,10 +56,6 @@ function History() {
                   {report.ai_report.risk_level}
                 </span>
               </p>
-
-              {/* <p className="text-sm text-gray-500 mt-3">
-                {new Date(report.created_at).toLocaleString()}
-              </p> */}
             </div>
           </Link>
         ))}

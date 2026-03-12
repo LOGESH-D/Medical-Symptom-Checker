@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import API from "../services/api";
 import HospitalMap from "../components/HospitalMap";
 
 function Report() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [report, setReport] = useState(null);
 
   useEffect(() => {
@@ -24,12 +23,6 @@ function Report() {
 
   return (
     <div className="p-10 space-y-8">
-      <button
-        onClick={() => navigate("/dashboard")}
-        className="bg-gray-800 text-white px-4 py-2 rounded"
-      >
-        Back to Dashboard
-      </button>
       <h1 className="text-3xl font-bold">Health Analysis Report</h1>
 
       <div className="bg-white p-6 shadow rounded">

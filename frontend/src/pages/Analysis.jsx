@@ -62,12 +62,6 @@ function Analysis() {
 
   return (
     <div className="max-w-xl mx-auto mt-10">
-      <button
-        onClick={() => navigate("/dashboard")}
-        className="bg-gray-800 text-white px-4 py-2 rounded"
-      >
-        Back to Dashboard
-      </button>
       <h2 className="text-2xl font-bold mb-6">Symptom Analysis</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
