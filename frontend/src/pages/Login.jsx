@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../services/api";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -9,6 +9,14 @@ function Login() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +42,7 @@ function Login() {
           type="email"
           placeholder="Email"
           className="border p-2 w-full mb-3"
+          required
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
 
@@ -41,16 +50,14 @@ function Login() {
           type="password"
           placeholder="Password"
           className="border p-2 w-full mb-3"
+          required
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
 
         <button className="bg-blue-600 text-white w-full py-2">Login</button>
         <span>
           If you don't have an account,{" "}
-          <Link
-            to="/register"
-            className="text-red-600"
-          >
+          <Link to="/register" className="text-red-600">
             register
           </Link>
         </span>
