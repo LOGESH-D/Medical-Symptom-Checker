@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../services/api";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Register() {
   const navigate = useNavigate();
@@ -22,6 +23,19 @@ function Register() {
       });
     } catch {
       alert("Failed to send OTP");
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const res = await API.post("/auth/google-login", {
+        token: credentialResponse.credential,
+      });
+      localStorage.setItem("token", res.data.access_token);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+      alert("Google authentication failed");
     }
   };
 
@@ -60,6 +74,23 @@ function Register() {
         <button className="bg-green-600 text-white w-full py-2 rounded">
           Send OTP
         </button>
+
+        <p className="text-sm mt-3 text-center">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-600">
+            login
+          </Link>
+        </p>
+
+        <div className="my-4 text-center text-gray-500">OR</div>
+
+        <div className="flex justify-center">
+          <GoogleLogin
+            text="signup_with"
+            onSuccess={handleGoogleSuccess}
+            onError={() => console.log("Google auth failed")}
+          />
+        </div>
       </form>
     </div>
   );

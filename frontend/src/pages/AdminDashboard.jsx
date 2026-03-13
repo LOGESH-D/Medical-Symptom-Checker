@@ -34,6 +34,7 @@ function AdminDashboard() {
     try {
       await API.delete(`/admin/users/${userId}`);
       fetchUsers();
+      fetchStats();
     } catch (error) {
       console.error("Delete failed", error);
     }
