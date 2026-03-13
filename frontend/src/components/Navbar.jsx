@@ -21,17 +21,14 @@ function Navbar() {
       </Link>
 
       <div className="flex gap-6 items-center">
-
         {isAuthPage && <Link to="/">Home</Link>}
 
         {!isAuthPage && token && (
           <>
             <Link to="/dashboard">Dashboard</Link>
-
             <Link to="/analysis">Analyze</Link>
-
             <Link to="/history">History</Link>
-
+            <Link to="/profile">Profile</Link>
             <button
               onClick={handleLogout}
               className="bg-red-500 px-3 py-1 rounded"
