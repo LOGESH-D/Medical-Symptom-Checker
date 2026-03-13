@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth, symptom, reports, otp
 from app.routes import profile
+from app.routes import admin
 
 load_dotenv()
 
@@ -21,6 +22,7 @@ app.include_router(symptom.router, prefix="/symptom", tags=["Symptoms"])
 app.include_router(reports.router, prefix="/reports", tags=["Reports"])
 app.include_router(otp.router, prefix="/auth", tags=["OTP"])
 app.include_router(profile.router, prefix="/user", tags=["User"])
+app.include_router(admin.router, prefix="/admin", tags=["Admin"])
 
 @app.get("/")
 async def home():

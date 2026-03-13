@@ -10,6 +10,8 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Navbar from "./components/Navbar.jsx";
 import OtpVerification from "./pages/OtpVerification.jsx";
 import Profile from "./pages/Profile.jsx";
+import AdminUsers from "./pages/AdminDashboard.jsx";
+import AdminUserDetails from "./pages/AdminUserDetails.jsx";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verify-otp" element={<OtpVerification />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/admin/users/:id" element={<AdminUserDetails />} />
         <Route
           path="/dashboard"
           element={

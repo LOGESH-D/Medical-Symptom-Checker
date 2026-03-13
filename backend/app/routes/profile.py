@@ -17,5 +17,6 @@ async def get_profile(current_user=Depends(get_current_user)):
     return {
         "name": user.get("name"),
         "email": user.get("email"),
+        "role": user.get("role", "user"),
         "analysis_count": total_analysis
     }

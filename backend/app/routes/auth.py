@@ -16,6 +16,7 @@ async def register(user: UserRegister):
         "name": user.name,
         "email": user.email,
         "password": h_pwd,
+        "role": "user",
         "created_at": datetime.now(timezone.utc)
     }
     user_collection.insert_one(new_user)
