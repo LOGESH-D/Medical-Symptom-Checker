@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
-import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
   const navigate = useNavigate();
@@ -11,29 +11,17 @@ function Register() {
     password: "",
   });
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      navigate("/dashboard");
-    }
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const emailRegex1 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const emailRegex2 = form.email.endsWith("@gmail.com");
-    if (!emailRegex2 || !emailRegex1.test(form.email)) {
-      alert("Enter a valid email address");
-      return;
-    }
     try {
-      const res = await API.post("/auth/register", form);
-      localStorage.setItem("token", res.data.access_token);
-      navigate("/login");
-    } catch (error) {
-      console.log(error.response.data);
-      alert(error.response.data.detail);
+      await API.post("/auth/send-otp", null, {
+        params: { email: form.email },
+      });
+      navigate("/verify-otp", {
+        state: form,
+      });
+    } catch {
+      alert("Failed to send OTP");
     }
   };
 
@@ -43,39 +31,35 @@ function Register() {
         onSubmit={handleSubmit}
         className="bg-white p-6 shadow rounded w-96"
       >
-        <h2 className="text-xl mb-4">Login</h2>
+        <h2 className="text-xl mb-4 font-bold">Register</h2>
 
         <input
           type="text"
           placeholder="Name"
           className="border p-2 w-full mb-3"
-          required
           onChange={(e) => setForm({ ...form, name: e.target.value })}
+          required
         />
 
         <input
           type="email"
           placeholder="Email"
           className="border p-2 w-full mb-3"
-          required
           onChange={(e) => setForm({ ...form, email: e.target.value })}
+          required
         />
 
         <input
           type="password"
           placeholder="Password"
           className="border p-2 w-full mb-3"
-          required
           onChange={(e) => setForm({ ...form, password: e.target.value })}
+          required
         />
 
-        <button className="bg-blue-600 text-white w-full py-2">Register</button>
-        <span>
-          If you have an account,{" "}
-          <Link to="/login" className="text-red-600">
-            login
-          </Link>
-        </span>
+        <button className="bg-green-600 text-white w-full py-2 rounded">
+          Send OTP
+        </button>
       </form>
     </div>
   );

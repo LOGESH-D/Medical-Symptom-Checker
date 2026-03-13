@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -9,6 +8,7 @@ import Report from "./pages/Report.jsx";
 import History from "./pages/History.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Navbar from "./components/Navbar.jsx";
+import OtpVerification from "./pages/OtpVerification.jsx";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/verify-otp" element={<OtpVerification />} />
         <Route
           path="/dashboard"
           element={

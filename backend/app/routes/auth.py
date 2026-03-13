@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException
 from app.models.user_model import UserRegister, UserLogin
 from app.database import user_collection
@@ -14,7 +15,8 @@ async def register(user: UserRegister):
     new_user = {
         "name": user.name,
         "email": user.email,
-        "password": h_pwd
+        "password": h_pwd,
+        "created_at": datetime.now(timezone.utc)
     }
     user_collection.insert_one(new_user)
     return {"message": "User registered successfully"}

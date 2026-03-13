@@ -9,6 +9,6 @@ client = MongoClient(MONGO_URI)
 
 db = client["medical_symptom_checker"]
 
-
 user_collection = db["users"]
 reports_collection = db["reports"]
+otp_collection = db["otp_verifications"]

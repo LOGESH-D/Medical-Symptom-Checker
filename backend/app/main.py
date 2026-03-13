@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import auth, symptom, reports
+from app.routes import auth, symptom, reports, otp
 
 load_dotenv()
 
@@ -15,10 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-app.include_router(symptom.router, prefix="/symptom", tags=["Symptom Analysis"])
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
+app.include_router(symptom.router, prefix="/symptom", tags=["Symptoms"])
 app.include_router(reports.router, prefix="/reports", tags=["Reports"])
-
+app.include_router(otp.router, prefix="/auth", tags=["OTP"])
 
 @app.get("/")
 async def home():
