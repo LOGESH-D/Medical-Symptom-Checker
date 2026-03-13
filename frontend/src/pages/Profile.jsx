@@ -23,13 +23,26 @@ function Profile() {
   return (
     <div className="flex justify-center items-center min-h-[70vh]">
       <div className="bg-white shadow-md rounded-lg p-6 w-96">
-        <h2 className="text-2xl font-semibold text-center mb-6">
-          User Profile
-        </h2>
+        {profile.role === "admin" ? (
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            Admin Profile
+          </h2>
+        ) : (
+          <h2 className="text-2xl font-semibold text-center mb-6">
+            User Profile
+          </h2>
+        )}
         <div className="space-y-3 text-gray-700">
-          <p><span className="font-semibold">Name:</span> {profile.name}</p>
-          <p><span className="font-semibold">Email:</span> {profile.email}</p>
-          <p><span className="font-semibold">Total Analysis:</span>{" "}{profile.analysis_count}</p>
+          <p>
+            <span className="font-semibold">Name:</span> {profile.name}
+          </p>
+          <p>
+            <span className="font-semibold">Email:</span> {profile.email}
+          </p>
+          <p>
+            <span className="font-semibold">Total Analysis:</span>{" "}
+            {profile.analysis_count}
+          </p>
         </div>
       </div>
     </div>

@@ -40,3 +40,16 @@ def delete_user(user_id: str, admin=Depends(get_admin_user)):
         "user_id": user_id
     })
     return {"message": "User deleted successfully"}
+
+@router.get("/stats")
+def get_admin_stats(admin=Depends(get_admin_user)):
+    total_users = user_collection.count_documents({"role": "user"})
+    total_analysis = reports_collection.count_documents({})
+    active_users = len(
+        reports_collection.distinct("user_id")
+    )
+    return {
+        "total_users": total_users,
+        "total_analysis": total_analysis,
+        "active_users": active_users
+    }
